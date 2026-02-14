@@ -1,0 +1,143 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "acedataservices.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z2FDTNDATAQYW2",
+                "DNSName": "d3326e7fhi8gb8.cloudfront.net.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "acedataservices.com.",
+            "Type": "MX",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "1 ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "5 ALT1.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "5 ALT2.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "10 ALT3.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "10 ALT4.ASPMX.L.GOOGLE.COM."
+                }
+            ]
+        },
+        {
+            "Name": "acedataservices.com.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-369.awsdns-46.com."
+                },
+                {
+                    "Value": "ns-1099.awsdns-09.org."
+                },
+                {
+                    "Value": "ns-1891.awsdns-44.co.uk."
+                },
+                {
+                    "Value": "ns-976.awsdns-58.net."
+                }
+            ]
+        },
+        {
+            "Name": "acedataservices.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-369.awsdns-46.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "acedataservices.com.",
+            "Type": "TXT",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "\"google-site-verification=3LvVPzvNp6fXrtxQQg6rc5wkj5OO02tt14C2URcqEGs\""
+                }
+            ]
+        },
+        {
+            "Name": "\\100.acedataservices.com.",
+            "Type": "TXT",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "\"MS=CA6724E159558B8859A2BFB056A455551AF3C18C\""
+                }
+            ]
+        },
+        {
+            "Name": "_870b54d4f39422834eea5f0d34e8d2a1.acedataservices.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_f3215f855a5ce208fc21d2bf0e010c22.mqzgcdqkwq.acm-validations.aws."
+                }
+            ]
+        },
+        {
+            "Name": "gcfqjhqkhozs23m77yaawdignneliuj4._domainkey.acedataservices.com.",
+            "Type": "CNAME",
+            "TTL": 1800,
+            "ResourceRecords": [
+                {
+                    "Value": "gcfqjhqkhozs23m77yaawdignneliuj4.dkim.amazonses.com"
+                }
+            ]
+        },
+        {
+            "Name": "vze3hkslgvlhkpn6yekdk4ba6jcig2ly._domainkey.acedataservices.com.",
+            "Type": "CNAME",
+            "TTL": 1800,
+            "ResourceRecords": [
+                {
+                    "Value": "vze3hkslgvlhkpn6yekdk4ba6jcig2ly.dkim.amazonses.com"
+                }
+            ]
+        },
+        {
+            "Name": "wz5tuoiu6fbl5kl3q62ezder7skta4xv._domainkey.acedataservices.com.",
+            "Type": "CNAME",
+            "TTL": 1800,
+            "ResourceRecords": [
+                {
+                    "Value": "wz5tuoiu6fbl5kl3q62ezder7skta4xv.dkim.amazonses.com"
+                }
+            ]
+        },
+        {
+            "Name": "www.acedataservices.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z2FDTNDATAQYW2",
+                "DNSName": "d3326e7fhi8gb8.cloudfront.net.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "_f2bb78022df81d4d88c5ba1a5d7b313d.www.acedataservices.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_4faa3a2ab6feacf55380127727569325.vrztfgqhxj.acm-validations.aws."
+                }
+            ]
+        }
+    ]
+}

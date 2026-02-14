@@ -1,0 +1,52 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "www.acedataservices.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z3AQBSTGFYJSTF",
+                "DNSName": "s3-website-us-east-1.amazonaws.com.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "www.acedataservices.com.",
+            "Type": "NS",
+            "TTL": 60,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-285.awsdns-35.com."
+                },
+                {
+                    "Value": "ns-1587.awsdns-06.co.uk."
+                },
+                {
+                    "Value": "ns-835.awsdns-40.net."
+                },
+                {
+                    "Value": "ns-1530.awsdns-63.org."
+                }
+            ]
+        },
+        {
+            "Name": "www.acedataservices.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-285.awsdns-35.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "_f2bb78022df81d4d88c5ba1a5d7b313d.www.acedataservices.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_4faa3a2ab6feacf55380127727569325.vrztfgqhxj.acm-validations.aws."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "madhuvalluri.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z2FDTNDATAQYW2",
+                "DNSName": "d21384msdztomy.cloudfront.net.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "madhuvalluri.com.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-561.awsdns-06.net."
+                },
+                {
+                    "Value": "ns-1788.awsdns-31.co.uk."
+                },
+                {
+                    "Value": "ns-425.awsdns-53.com."
+                },
+                {
+                    "Value": "ns-1357.awsdns-41.org."
+                }
+            ]
+        },
+        {
+            "Name": "madhuvalluri.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-561.awsdns-06.net. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "_11ad6fe16d72d40f048aeace2695a1e2.madhuvalluri.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_0c676f698fedf094a1871a05ca7c81e5.cltjbwlkcy.acm-validations.aws."
+                }
+            ]
+        },
+        {
+            "Name": "www.madhuvalluri.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z03725791P1LZLX6PQ6BI",
+                "DNSName": "madhuvalluri.com.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "_fee369523927045df71e1b88f5d91d5c.www.madhuvalluri.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_617b738555899726d6c20b7890f5407b.cltjbwlkcy.acm-validations.aws."
+                }
+            ]
+        }
+    ]
+}

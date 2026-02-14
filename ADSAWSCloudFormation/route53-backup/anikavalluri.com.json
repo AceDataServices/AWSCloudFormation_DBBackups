@@ -1,0 +1,81 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "anikavalluri.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z2FDTNDATAQYW2",
+                "DNSName": "dgs1x5nmn10lr.cloudfront.net.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "anikavalluri.com.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-1479.awsdns-56.org."
+                },
+                {
+                    "Value": "ns-833.awsdns-40.net."
+                },
+                {
+                    "Value": "ns-83.awsdns-10.com."
+                },
+                {
+                    "Value": "ns-1842.awsdns-38.co.uk."
+                }
+            ]
+        },
+        {
+            "Name": "anikavalluri.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-1479.awsdns-56.org. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "anikavalluri.com.",
+            "Type": "TXT",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "\"google-site-verification=aaKUHAMCIgWaynU2NHtZaP7oRC2gr5SBtFNjQ7dMz3g\""
+                }
+            ]
+        },
+        {
+            "Name": "_8e080d374c974306c73093747c8d5f94.anikavalluri.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_83aff026b3abb3f247a1adcbbd3d61cf.dwylyhsgxh.acm-validations.aws."
+                }
+            ]
+        },
+        {
+            "Name": "www.anikavalluri.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z04453463282WGCV3IY",
+                "DNSName": "anikavalluri.com.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "_19a8f3b393fed07acce73497c23f7a8c.www.anikavalluri.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_2c7b805ef252b8b00d32a8c970610e86.dwylyhsgxh.acm-validations.aws."
+                }
+            ]
+        }
+    ]
+}

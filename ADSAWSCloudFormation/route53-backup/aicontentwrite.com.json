@@ -1,0 +1,103 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "aicontentwrite.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z35SXDOTRQ7X7K",
+                "DNSName": "dualstack.ads-aicontentwrite-alb-755827750.us-east-1.elb.amazonaws.com.",
+                "EvaluateTargetHealth": false
+            }
+        },
+        {
+            "Name": "aicontentwrite.com.",
+            "Type": "MX",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "1 ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "5 ALT1.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "5 ALT2.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "10 ALT3.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "10 ALT4.ASPMX.L.GOOGLE.COM."
+                }
+            ]
+        },
+        {
+            "Name": "aicontentwrite.com.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-2002.awsdns-58.co.uk."
+                },
+                {
+                    "Value": "ns-843.awsdns-41.net."
+                },
+                {
+                    "Value": "ns-1138.awsdns-14.org."
+                },
+                {
+                    "Value": "ns-66.awsdns-08.com."
+                }
+            ]
+        },
+        {
+            "Name": "aicontentwrite.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-2002.awsdns-58.co.uk. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "aicontentwrite.com.",
+            "Type": "TXT",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "\"google-site-verification=FGC3hlKzLP_tKGNDszFvpUVvvtoFsowv5FzdVLYw08M\""
+                }
+            ]
+        },
+        {
+            "Name": "245e63ff67b2d0a4439f7348a07a8017.aicontentwrite.com.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "verify.bing.com."
+                }
+            ]
+        },
+        {
+            "Name": "_6ae3565422311a19dac872d0572d2cdf.aicontentwrite.com.",
+            "Type": "CNAME",
+            "TTL": 60,
+            "ResourceRecords": [
+                {
+                    "Value": "F47356FFA3D989725BBFBB3CE0E888C9.82E2238330247E877645121E6BBDB74A.63c05213abc3b.comodoca.com"
+                }
+            ]
+        },
+        {
+            "Name": "www.aicontentwrite.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z10000912KCWHAFM01MXR",
+                "DNSName": "aicontentwrite.com.",
+                "EvaluateTargetHealth": false
+            }
+        }
+    ]
+}

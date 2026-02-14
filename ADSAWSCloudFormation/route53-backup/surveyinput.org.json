@@ -1,0 +1,63 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "surveyinput.org.",
+            "Type": "A",
+            "TTL": 60,
+            "ResourceRecords": [
+                {
+                    "Value": "54.204.211.144"
+                }
+            ]
+        },
+        {
+            "Name": "surveyinput.org.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-543.awsdns-03.net."
+                },
+                {
+                    "Value": "ns-1848.awsdns-39.co.uk."
+                },
+                {
+                    "Value": "ns-1431.awsdns-50.org."
+                },
+                {
+                    "Value": "ns-427.awsdns-53.com."
+                }
+            ]
+        },
+        {
+            "Name": "surveyinput.org.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-543.awsdns-03.net. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "_8d6a10a11f1faf7228f2cc66c668f17a.surveyinput.org.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_45e4cbaeac31d52144115e9c7e594346.fyfbssdptv.acm-validations.aws."
+                }
+            ]
+        },
+        {
+            "Name": "_33b5eb6f71be4be98c8d5a87d40bdbb3.www.surveyinput.org.",
+            "Type": "CNAME",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "_5039be4c26bdb086ea1ab6a5dc7df596.fyfbssdptv.acm-validations.aws."
+                }
+            ]
+        }
+    ]
+}

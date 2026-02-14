@@ -1,0 +1,93 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "surveyinput.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z35SXDOTRQ7X7K",
+                "DNSName": "dualstack.ads-prod-alb-529277000.us-east-1.elb.amazonaws.com.",
+                "EvaluateTargetHealth": true
+            }
+        },
+        {
+            "Name": "surveyinput.com.",
+            "Type": "MX",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "1 ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "5 ALT1.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "5 ALT2.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "10 ALT3.ASPMX.L.GOOGLE.COM."
+                },
+                {
+                    "Value": "10 ALT4.ASPMX.L.GOOGLE.COM."
+                }
+            ]
+        },
+        {
+            "Name": "surveyinput.com.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-210.awsdns-26.com."
+                },
+                {
+                    "Value": "ns-780.awsdns-33.net."
+                },
+                {
+                    "Value": "ns-1391.awsdns-45.org."
+                },
+                {
+                    "Value": "ns-1828.awsdns-36.co.uk."
+                }
+            ]
+        },
+        {
+            "Name": "surveyinput.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-210.awsdns-26.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "surveyinput.com.",
+            "Type": "TXT",
+            "TTL": 300,
+            "ResourceRecords": [
+                {
+                    "Value": "\"google-site-verification=Ould139q2z0R02DUJ3zZ0BhXg7Da4WFYTcH6YpxhZhs\""
+                }
+            ]
+        },
+        {
+            "Name": "_bf6876aa6c9b9d5958b95faa3ecfae1d.surveyinput.com.",
+            "Type": "CNAME",
+            "TTL": 60,
+            "ResourceRecords": [
+                {
+                    "Value": "D3987CF6A6F94D50B36D71E2FC3CAC01.52F4B70A5A798CE6D755BFB7C2077155.63b534cee3ebe.comodoca.com"
+                }
+            ]
+        },
+        {
+            "Name": "www.surveyinput.com.",
+            "Type": "A",
+            "AliasTarget": {
+                "HostedZoneId": "Z0648918PSTDEULENVT6",
+                "DNSName": "surveyinput.com.",
+                "EvaluateTargetHealth": false
+            }
+        }
+    ]
+}
