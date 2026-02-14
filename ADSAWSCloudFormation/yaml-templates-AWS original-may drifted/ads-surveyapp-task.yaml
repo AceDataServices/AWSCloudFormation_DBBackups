@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation template for Fargate
+Parameters:
+  AppName:
+    Type: String
+    Default: surveyapp
+  EnvName:
+    Type: String
+    Default: prod    
+  Image:
+    Type: String
+    Default: 481330377004.dkr.ecr.us-east-1.amazonaws.com/surveyapp:latest
+  ContainerPort:
+    Type: Number
+    Default: 80
+  Account:
+    Type: String
+    Default: 481330377004
+
+Resources:
+  TaskDefinition:
+    Type: 'AWS::ECS::TaskDefinition'
+    DependsOn: LogGroup
+    Properties:
+      Family: !Join 
+        - ''
+        - - 'ads-'
+          - !Ref EnvName
+          - '-'
+          - !Ref AppName
+          - '-task'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      Cpu: 0.25 vcpu
+      Memory: 0.5GB
+      ExecutionRoleArn: !Join 
+               - ''
+               - - 'arn:aws:iam::'
+                 - !Ref Account
+                 - ':role/ecsTaskExecutionRole'
+      TaskRoleArn:  !Join 
+               - ''
+               - - 'arn:aws:iam::'
+                 - !Ref Account
+                 - ':role/ecsTaskExecutionRole'
+      ContainerDefinitions:
+        - Name: !Ref AppName
+          Image: !Ref Image
+          Essential: true                     
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+              HostPort: !Ref ContainerPort
+              Protocol: tcp        
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-region: !Ref 'AWS::Region'
+              awslogs-group: !Ref LogGroup
+              awslogs-stream-prefix: ecs 
+  LogGroup:
+    Type: 'AWS::Logs::LogGroup'
+    Properties:
+      LogGroupName: !Join 
+        - ''
+        - - /ecs/
+          - 'ads-'
+          - !Ref EnvName
+          - '-'
+          - !Ref AppName  
+          - '-task'

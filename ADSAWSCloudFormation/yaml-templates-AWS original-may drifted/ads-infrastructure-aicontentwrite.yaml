@@ -1,0 +1,148 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation template for Fargate.
+Parameters:
+  VPC:
+    Type: 'AWS::EC2::VPC::Id'
+    Default: vpc-5f27ea25
+  SubnetB:
+    Type: 'AWS::EC2::Subnet::Id'
+    Default: subnet-4e53e129
+  SubnetC:
+    Type: 'AWS::EC2::Subnet::Id'
+    Default: subnet-85bb02ab
+  Account:
+    Type: String
+    Default: 481330377004
+  EnvName:
+    Type: String
+    Default: aicwriteprod    
+  LoadBalancerPort:
+    Type: Number
+    Default: 443
+  ContainerPort:
+    Type: Number
+    Default: 80    
+  HealthCheckPath:
+    Type: String
+    Default: /
+  CertificateARN:
+    Type: String
+    Default: arn:aws:acm:us-east-1:481330377004:certificate/bd34e1b7-cc8b-4b66-9573-e06ae6d70812
+Resources:
+  ListenerHTTPS:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      DefaultActions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+      LoadBalancerArn: !Ref LoadBalancer
+      Certificates: 
+        - CertificateArn: !Ref CertificateARN
+      Port: !Ref LoadBalancerPort
+      Protocol: HTTPS    
+
+  LoadBalancer:
+    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Properties:
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: 60
+      Name: !Join 
+        - ''
+        - - 'ads-'
+          - !Ref EnvName
+          - '-alb'  
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref LoadBalancerSecurityGroup
+      Subnets:
+        - !Ref SubnetB
+        - !Ref SubnetC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 0879a533-8345-4298-975e-e029089194f5
+  LoadBalancerSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: !Join 
+        - ''
+        - - 'ads-'
+          - !Ref EnvName
+          - '-alb-sg'
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: !Ref LoadBalancerPort
+          ToPort: !Ref LoadBalancerPort
+          CidrIp: 0.0.0.0/0
+
+  TargetGroup:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: !Ref HealthCheckPath
+      HealthCheckTimeoutSeconds: 10
+      UnhealthyThresholdCount: 3
+      HealthyThresholdCount: 3
+      Name: !Join 
+        - ''
+        - - 'ads-'
+          - !Ref EnvName        
+          - '-tg'
+      Port: !Ref ContainerPort
+      Protocol: HTTP
+      TargetGroupAttributes:
+        - Key: deregistration_delay.timeout_seconds
+          Value: 60
+      TargetType: ip
+      VpcId: !Ref VPC
+Outputs:
+  ListenerHTTPS: 
+    Description: ListenerARN
+    Value: !Ref ListenerHTTPS
+    Export:
+      Name:  !Join 
+        - ''
+        - - !Ref EnvName
+          - ListenerHTTPS
+  LoadBalancerSecurityGroup:
+    Description: Loadbalancersecuritygroup
+    Value: !Ref LoadBalancerSecurityGroup
+    Export:
+      Name: !Join 
+        - ''
+        - - !Ref EnvName
+          - LoadBalancerSecurityGroup
+  TargetGroup:
+    Description: TargetGroup
+    Value: !Ref TargetGroup
+    Export:
+      Name: !Join 
+        - ''
+        - - !Ref EnvName
+          - TargetGroup
+  LoadBalancerPort:
+    Description: LoadbalancerPort
+    Value: !Ref LoadBalancerPort
+    Export: 
+      Name: !Join 
+        - ''
+        - - !Ref EnvName
+          - LoadBalancerPort
+  HealthCheckPath:
+    Description: HealthCheckPath
+    Value: !Ref HealthCheckPath
+    Export:
+      Name: !Join 
+        - ''
+        - - !Ref EnvName
+          - HealthCheckPath
+  
+      
+
+
+
+
+
+
+      

@@ -1,0 +1,215 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CloudFormation template for ads-aicontentwrite-alb Application Load Balancer'
+
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Default: vpc-5f27ea25
+    Description: VPC ID for the load balancer
+  
+  SubnetIds:
+    Type: List<AWS::EC2::Subnet::Id>
+    Default: "subnet-4e53e129,subnet-85bb02ab"
+    Description: Subnet IDs for the load balancer (us-east-1b, us-east-1c)
+  
+  SecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+    Default: sg-0c575b027d391a59d
+    Description: Security Group ID for the load balancer
+  
+  CertificateArn:
+    Type: String
+    Default: arn:aws:acm:us-east-1:481330377004:certificate/d779f372-f06b-4bcc-bcf8-8a1610a1b460
+    Description: SSL Certificate ARN for HTTPS listeners
+  
+  S3BucketName:
+    Type: String
+    Default: elb-aicontentwrite
+    Description: S3 bucket name for access logs
+  
+  Environment:
+    Type: String
+    Default: production
+    Description: Environment tag
+
+Resources:
+  # Application Load Balancer
+  ApplicationLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: ads-aicontentwrite-alb
+      Type: application
+      Scheme: internet-facing
+      IpAddressType: ipv4
+      Subnets: !Ref SubnetIds
+      SecurityGroups:
+        - !Ref SecurityGroupId
+      LoadBalancerAttributes:
+        - Key: idle_timeout.timeout_seconds
+          Value: '180'
+        - Key: routing.http2.enabled
+          Value: 'true'
+        - Key: access_logs.s3.enabled
+          Value: 'true'
+        - Key: access_logs.s3.bucket
+          Value: !Ref S3BucketName
+        - Key: access_logs.s3.prefix
+          Value: 'elb'
+        - Key: deletion_protection.enabled
+          Value: 'true'
+        - Key: load_balancing.cross_zone.enabled
+          Value: 'true'
+        - Key: routing.http.desync_mitigation_mode
+          Value: 'defensive'
+        - Key: waf.fail_open.enabled
+          Value: 'false'
+        - Key: routing.http.preserve_host_header.enabled
+          Value: 'false'
+        - Key: routing.http.x_amzn_tls_version_and_cipher_suite.enabled
+          Value: 'false'
+        - Key: routing.http.xff_client_port.enabled
+          Value: 'false'
+        - Key: routing.http.xff_header_processing.mode
+          Value: 'append'
+        - Key: client_keep_alive.seconds
+          Value: '3600'
+      Tags:
+        - Key: Name
+          Value: ads-aicontentwrite-alb
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Target Group 1: ads-aicontentwrite-tg
+  MainTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: ads-aicontentwrite-tg
+      Port: 80
+      Protocol: HTTP
+      VpcId: !Ref VpcId
+      TargetType: instance
+      HealthCheckEnabled: true
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckPort: traffic-port
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 5
+      UnhealthyThresholdCount: 2
+      Matcher:
+        HttpCode: '200'
+      Tags:
+        - Key: Name
+          Value: ads-aicontentwrite-tg
+        - Key: Environment
+          Value: !Ref Environment
+
+  # Target Group 2: tgtest
+  TestTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: tgtest
+      Port: 80
+      Protocol: HTTP
+      VpcId: !Ref VpcId
+      TargetType: instance
+      HealthCheckEnabled: true
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckPort: traffic-port
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 5
+      UnhealthyThresholdCount: 2
+      Matcher:
+        HttpCode: '200'
+      Tags:
+        - Key: Name
+          Value: tgtest
+        - Key: Environment
+          Value: !Ref Environment
+
+  # HTTP Listener (Port 80) - Redirects to HTTPS
+  HTTPListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions:
+        - Type: redirect
+          RedirectConfig:
+            Protocol: HTTPS
+            Port: '443'
+            StatusCode: HTTP_301
+
+  # HTTPS Listener (Port 443) - Main listener
+  HTTPSListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      SslPolicy: ELBSecurityPolicy-2016-08
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref MainTargetGroup
+
+  # HTTPS Listener (Port 8088) - Secondary listener
+  HTTPSListener8088:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref ApplicationLoadBalancer
+      Port: 8088
+      Protocol: HTTPS
+      SslPolicy: ELBSecurityPolicy-TLS13-1-2-2021-06
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TestTargetGroup
+
+Outputs:
+  LoadBalancerArn:
+    Description: ARN of the Application Load Balancer
+    Value: !Ref ApplicationLoadBalancer
+    Export:
+      Name: !Sub "${AWS::StackName}-LoadBalancer-ARN"
+
+  LoadBalancerDNSName:
+    Description: DNS name of the Application Load Balancer
+    Value: !GetAtt ApplicationLoadBalancer.DNSName
+    Export:
+      Name: !Sub "${AWS::StackName}-LoadBalancer-DNSName"
+
+  LoadBalancerHostedZoneID:
+    Description: Hosted Zone ID of the Application Load Balancer
+    Value: !GetAtt ApplicationLoadBalancer.CanonicalHostedZoneID
+    Export:
+      Name: !Sub "${AWS::StackName}-LoadBalancer-HostedZoneID"
+
+  MainTargetGroupArn:
+    Description: ARN of the main target group
+    Value: !Ref MainTargetGroup
+    Export:
+      Name: !Sub "${AWS::StackName}-MainTargetGroup-ARN"
+
+  TestTargetGroupArn:
+    Description: ARN of the test target group
+    Value: !Ref TestTargetGroup
+    Export:
+      Name: !Sub "${AWS::StackName}-TestTargetGroup-ARN"
+
+  HTTPSListenerArn:
+    Description: ARN of the HTTPS listener (port 443)
+    Value: !Ref HTTPSListener
+    Export:
+      Name: !Sub "${AWS::StackName}-HTTPSListener-ARN"
+
+  HTTPSListener8088Arn:
+    Description: ARN of the HTTPS listener (port 8088)
+    Value: !Ref HTTPSListener8088
+    Export:
+      Name: !Sub "${AWS::StackName}-HTTPSListener8088-ARN"

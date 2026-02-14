@@ -1,0 +1,35 @@
+2010-09-09	The template used to create an ECS Service from the ECS Console.
+CLUSTERNAME	The cluster used to create the service.
+VALUE	ECSClusterName
+ECSSERVICE	The created service.
+VALUE	ECSService
+LISTENERRULE	The created listener rule.
+VALUE	ListenerRule
+TARGETGROUP	The created target group.
+VALUE	TargetGroup
+ECSCLUSTERNAME	ads-prod-cluster	String
+LOADBALANCERNAME	ads-aicontentwrite-alb	String
+SECURITYGROUPIDS	sg-3f470775	CommaDelimitedList
+SUBNETIDS	subnet-4e53e129,subnet-85bb02ab	CommaDelimitedList
+VPCID	vpc-5f27ea25	String
+ECSSERVICE	AWS::ECS::Service
+DEPENDSON	ListenerRule
+PROPERTIES	ads-prod-cluster	1	True	FARGATE	LATEST	REPLICA	test2	arn:aws:ecs:us-east-1:481330377004:task-definition/test-aicontentwriteapp-task:2
+DEPLOYMENTCONFIGURATION	200	100
+DEPLOYMENTCIRCUITBREAKER	True	True
+DEPLOYMENTCONTROLLER	ECS
+LOADBALANCERS	aicontentwriteapp	80
+LOADBALANCERNAME	AWS::NoValue
+TARGETGROUPARN	TargetGroup
+AWSVPCCONFIGURATION	ENABLED
+SECURITYGROUPS	SecurityGroupIDs
+SUBNETS	SubnetIDs
+SERVICECONNECTCONFIGURATION	False
+LISTENERRULE	AWS::ElasticLoadBalancingV2::ListenerRule
+PROPERTIES	arn:aws:elasticloadbalancing:us-east-1:481330377004:listener/app/ads-aicontentwrite-alb/b8cd098b2d4fbe3f/d81fdcaff18d0e25	1
+ACTIONS	forward
+TARGETGROUPARN	TargetGroup
+CONDITIONS	path-pattern
+VALUES	/
+TARGETGROUP	AWS::ElasticLoadBalancingV2::TargetGroup
+PROPERTIES	/	HTTP	tgtest	80	HTTP	ip	vpc-5f27ea25
